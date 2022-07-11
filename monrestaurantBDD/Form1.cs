@@ -59,6 +59,8 @@ namespace monrestaurantBDD
                     query.ExecuteNonQuery();
                     query.Parameters.Clear();
 
+                    MessageBox.Show("Ajouté");
+
                 }
             }
         }
