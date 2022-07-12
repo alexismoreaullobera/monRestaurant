@@ -12,32 +12,36 @@ namespace monrestaurantBDD
 
         MySqlConnection connection;
         Boolean isConnected = false;
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnConnection_Click_1(object sender, EventArgs e)
         {
-            if (button1.Text == "Se connecter")
+            if (btnConnection.Text == "Se connecter")
             {
                 connection = new MySqlConnection("SERVER = db4free.net; PORT = 3306; DATABASE = monrestaurant; UID=projetest; PWD=basetest;");
-                if (connection.State == System.Data.ConnectionState.Closed)
+
                 {
-                   try
+                    try
                     {
-                        connection.Open();
-                        button1.Text = "Se déconnecter";
+                        if (connection.State == System.Data.ConnectionState.Closed) { connection.Open(); }
+                        btnConnection.Text = "Se déconnecter";
                         isConnected = true;
+
                     }
-                    catch  (Exception ex) { MessageBox.Show(ex.Message); } 
-                }
-                else
-                {
-                    connection.Close();
-                    button1.Text = "Se connecter";
-                    isConnected=false;
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                 }
 
-                
+
+
+            }
+            else
+            {
+                connection.Close();
+                btnConnection.Text = "Se connecter";
+                isConnected = false;
+
+                listView1.Clear();
             }
         }
+
 
         private void btnAddClient_Click(object sender, EventArgs e)
         {
@@ -45,7 +49,7 @@ namespace monrestaurantBDD
             {
                 MessageBox.Show("Les champs doivent être renseignés");
             }
-            else if (isConnected = false)
+            else if (isConnected == false)
             {
                 MessageBox.Show("Veuillez vous connecter");
             }
@@ -53,16 +57,49 @@ namespace monrestaurantBDD
             {
                 try
                 {
-                    MySqlCommand query = new MySqlCommand(" INSERT INTO Clients (Nom, Prénom) VALUES (@Nom, @Prénom) ");
-                    query.Parameters.AddWithValue("@Name", textBoxAddName.Text);
+                    MySqlCommand query = new MySqlCommand(" INSERT INTO Clients (Nom, Prénom) VALUES (@Nom, @Prénom) ", connection);
+                    query.Parameters.AddWithValue("@Nom", textBoxAddName.Text);
                     query.Parameters.AddWithValue("@Prénom", textBoxAddFirstname.Text);
                     query.ExecuteNonQuery();
-                    query.Parameters.Clear();
-
+                    
                     MessageBox.Show("Ajouté");
 
+                    query.Parameters.Clear();
+                    textBoxAddName.Clear();
+                    textBoxAddFirstname.Clear();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
+
+        private void btnList_Click(object sender, EventArgs e)
+        {
+            if (isConnected == false )
+            {
+                MessageBox.Show("Veuillez vous identifier");
+            }
+            else
+            {
+                listView1.Items.Clear();
+                MySqlCommand query = new MySqlCommand("SELECT * from Clients", connection);
+                using(MySqlDataReader dataReader = query.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        String id = dataReader["id"].ToString();
+                        String nom = dataReader["Nom"].ToString();
+                        String prenom = dataReader["Prénom"].ToString();
+
+                        listView1.Items.Add(new ListViewItem(new String[] { id, nom, prenom }));
+                    }
+                }
+
+            }
+        }
+
+
     }
 }
