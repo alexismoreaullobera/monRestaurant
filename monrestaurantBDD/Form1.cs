@@ -100,6 +100,25 @@ namespace monrestaurantBDD
             }
         }
 
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isConnected == false )
+            {
+                MessageBox.Show("Veuillez vous connecter");
+            }
+            else
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    ListViewItem selection = listView1.SelectedItems[0];
+                    String id = selection.SubItems[0].Text;
+                    MySqlCommand query = new MySqlCommand("DELETE FROM Clients WHERE id=@id ", connection);
+                    query.Parameters.AddWithValue("id", id);
+                    query.ExecuteNonQuery();
 
+                }
+
+            }
+        }
     }
 }
