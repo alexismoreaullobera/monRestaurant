@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnConnection = new System.Windows.Forms.Button();
             this.groupBoxAddClient = new System.Windows.Forms.GroupBox();
             this.btnAddClient = new System.Windows.Forms.Button();
@@ -41,8 +42,13 @@
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.contextMenuStripClientList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.détailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxAddClient.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.contextMenuStripClientList.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnection
@@ -138,7 +144,10 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.listView1.ContextMenuStrip = this.contextMenuStripClientList;
+            this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(7, 51);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(365, 427);
             this.listView1.TabIndex = 0;
@@ -159,6 +168,34 @@
             this.columnHeader3.Text = "Prénom";
             this.columnHeader3.Width = 150;
             // 
+            // contextMenuStripClientList
+            // 
+            this.contextMenuStripClientList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.détailsToolStripMenuItem,
+            this.modifierToolStripMenuItem,
+            this.supprimerToolStripMenuItem});
+            this.contextMenuStripClientList.Name = "contextMenuStripClientList";
+            this.contextMenuStripClientList.Size = new System.Drawing.Size(130, 70);
+            // 
+            // détailsToolStripMenuItem
+            // 
+            this.détailsToolStripMenuItem.Name = "détailsToolStripMenuItem";
+            this.détailsToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.détailsToolStripMenuItem.Text = "Détails";
+            // 
+            // modifierToolStripMenuItem
+            // 
+            this.modifierToolStripMenuItem.Name = "modifierToolStripMenuItem";
+            this.modifierToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.modifierToolStripMenuItem.Text = "Modifier";
+            // 
+            // supprimerToolStripMenuItem
+            // 
+            this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.supprimerToolStripMenuItem.Text = "Supprimer";
+            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -173,6 +210,7 @@
             this.groupBoxAddClient.ResumeLayout(false);
             this.groupBoxAddClient.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.contextMenuStripClientList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -192,5 +230,9 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
+        private ContextMenuStrip contextMenuStripClientList;
+        private ToolStripMenuItem détailsToolStripMenuItem;
+        private ToolStripMenuItem modifierToolStripMenuItem;
+        private ToolStripMenuItem supprimerToolStripMenuItem;
     }
 }
