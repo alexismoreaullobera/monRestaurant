@@ -1,6 +1,6 @@
 ﻿namespace monrestaurantBDD
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -175,28 +175,29 @@
             this.modifierToolStripMenuItem,
             this.supprimerToolStripMenuItem});
             this.contextMenuStripClientList.Name = "contextMenuStripClientList";
-            this.contextMenuStripClientList.Size = new System.Drawing.Size(130, 70);
+            this.contextMenuStripClientList.Size = new System.Drawing.Size(181, 92);
             // 
             // détailsToolStripMenuItem
             // 
             this.détailsToolStripMenuItem.Name = "détailsToolStripMenuItem";
-            this.détailsToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.détailsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.détailsToolStripMenuItem.Text = "Détails";
             // 
             // modifierToolStripMenuItem
             // 
             this.modifierToolStripMenuItem.Name = "modifierToolStripMenuItem";
-            this.modifierToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.modifierToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.modifierToolStripMenuItem.Text = "Modifier";
+            this.modifierToolStripMenuItem.Click += new System.EventHandler(this.modifierToolStripMenuItem_Click_1);
             // 
             // supprimerToolStripMenuItem
             // 
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
             this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -205,8 +206,8 @@
             this.Controls.Add(this.groupBoxAddClient);
             this.Controls.Add(this.btnConnection);
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.Text = "Menu Principal";
             this.groupBoxAddClient.ResumeLayout(false);
             this.groupBoxAddClient.PerformLayout();
             this.groupBox1.ResumeLayout(false);

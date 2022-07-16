@@ -2,9 +2,9 @@ using MySql.Data.MySqlClient;
 
 namespace monrestaurantBDD
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -113,11 +113,44 @@ namespace monrestaurantBDD
                     ListViewItem selection = listView1.SelectedItems[0];
                     String id = selection.SubItems[0].Text;
                     MySqlCommand query = new MySqlCommand("DELETE FROM Clients WHERE id=@id ", connection);
-                    query.Parameters.AddWithValue("id", id);
+                    query.Parameters.AddWithValue("@id", id);
                     query.ExecuteNonQuery();
 
                 }
 
+            }
+        }
+
+
+        private void modifierToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem selection = listView1.SelectedItems[0];
+                String id = selection.SubItems[0].Text;
+                String nom = selection.SubItems[1].Text;
+                String prenom = selection.SubItems[2].Text;
+
+                using (UpdateForm currentUpdateForm = new UpdateForm())
+                {
+                    currentUpdateForm.id = id;
+                    currentUpdateForm.nom = nom;
+                    currentUpdateForm.prenom = prenom;
+
+                    if (currentUpdateForm.ShowDialog() == DialogResult.Yes)
+                    {
+                        MySqlCommand query = new MySqlCommand("UPDATE Clients SET Nom=@nom, Prénom=@prenom WHERE id=@id", connection);
+                        query.Parameters.AddWithValue("@nom", currentUpdateForm.nom);
+                        query.Parameters.AddWithValue("@prenom", currentUpdateForm.prenom);
+                        query.Parameters.AddWithValue("@id", currentUpdateForm.id);
+                        query.ExecuteNonQuery();
+
+                        selection.SubItems[1].Text = currentUpdateForm.nom;
+                        selection.SubItems[2].Text = currentUpdateForm.prenom;
+
+                        MessageBox.Show("Modifié");
+                    }
+                }
             }
         }
     }
